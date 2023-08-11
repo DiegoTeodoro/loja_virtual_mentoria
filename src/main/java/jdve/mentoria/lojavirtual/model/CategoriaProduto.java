@@ -1,6 +1,7 @@
 package jdve.mentoria.lojavirtual.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +12,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="marca_produto")
-@SequenceGenerator(name="seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name="categoria_produto")
+@SequenceGenerator(name="seq_categoria_produto", sequenceName = "categoria_produto", allocationSize = 1, initialValue = 1)
+public class CategoriaProduto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +22,7 @@ public class MarcaProduto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(name = "nome_desc", nullable = false)
 	private String nomeDesc;
 
 	public Long getId() {
@@ -39,8 +40,23 @@ public class MarcaProduto implements Serializable {
 	public void setNomeDesc(String nomeDesc) {
 		this.nomeDesc = nomeDesc;
 	}
-	
-	
-	
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CategoriaProduto other = (CategoriaProduto) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
 }
